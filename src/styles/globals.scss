@@ -1,0 +1,57 @@
+@import '@/styles/grid.scss';
+@import '@/styles/variables.scss';
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	outline: none;
+	font-family: inherit;
+}
+
+html {
+	font-size: 16px;
+	scroll-behavior: smooth;
+}
+
+body {
+	position: relative;
+	background-color: $color-bg-main;
+	color: $color-fg;
+	font-family: var(--main);
+}
+
+.btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	max-width: 400px;
+	padding: 1rem;
+	background-color: $color-primary;
+	border-radius: 5px;
+	border: none;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	& > span {
+		font-weight: 600;
+		color: $color-bg-el;
+	}
+}
+
+.wrapper {
+	display: flex;
+	overflow: hidden;
+}
+
+.section {
+	box-shadow: $shadow;
+	border-radius: 10px;
+	padding: 1rem;
+	background-color: $color-bg-el;
+}

@@ -1,0 +1,158 @@
+@import '@/styles/variables.scss';
+
+$color-unactive: lighten($color-fg, 65%);
+$color-active: $color-primary;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	&-section {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+		margin-bottom: 2rem;
+
+		&__title {
+			font-size: 1.4rem;
+			font-weight: 600;
+			&-wrapper {
+				width: 100%;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				margin-bottom: 2rem;
+			}
+		}
+	}
+
+	&-field {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		margin-bottom: 2rem;
+		max-width: 620px;
+		width: 100%;
+
+		&__caption {
+			font-weight: 600;
+			font-size: 1.1rem;
+			margin-bottom: 1rem;
+		}
+		&__title {
+			color: $color-fg;
+			font-size: 1rem;
+			font-weight: 600;
+			margin-bottom: 0.3rem;
+			user-select: none;
+
+			&-wrapper {
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				text-align: center;
+				margin-bottom: 0.3rem;
+			}
+		}
+
+		&__input {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+
+			padding: 0.65rem 1rem;
+			background-color: $color-bg-el;
+
+			border: 0.12rem solid $color-unactive;
+			color: lighten($color-fg, 65%);
+			border-radius: 6px;
+
+			font-size: 1rem;
+			min-height: 35px;
+
+			width: 100%;
+			max-width: 600px;
+
+			will-change: border-color;
+			transition: border-color 250ms ease-in-out;
+			&:focus {
+				border-color: $color-active;
+				color: $color-fg;
+			}
+		}
+
+		&__checkbox,
+		&__radio {
+			appearance: none;
+			position: relative;
+			width: 1.35rem;
+			height: 1.35rem;
+			border: 0.14rem solid $color-unactive;
+			border-radius: 50%;
+			will-change: border-color, background-color;
+			transition: border-color 150ms ease-in-out,
+				background-color 150ms ease-in-out;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 45%;
+				height: 45%;
+				background-color: $color-bg-main;
+				border-radius: 50%;
+				opacity: 0;
+				user-select: none;
+				will-change: opacity;
+				transition: opacity 150ms ease-in-out 50ms;
+			}
+
+			&:checked {
+				background-color: $color-active;
+				border-color: $color-active;
+				&::before {
+					opacity: 1;
+				}
+			}
+		}
+
+		&__checkbox {
+			border-radius: 5px;
+			&::before {
+				content: 'v';
+				color: $color-bg-main;
+				font-weight: 700;
+				top: 45%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				border: 0;
+				background: transparent;
+			}
+		}
+
+		&.radio,
+		&.checkbox {
+			margin-bottom: 1rem;
+			cursor: pointer;
+			align-items: center;
+			justify-content: flex-start;
+			flex-direction: row;
+			position: relative;
+			width: fit-content;
+
+			& .form-field__title {
+				margin-bottom: 0;
+				margin-left: 0.6rem;
+				font-weight: normal;
+				font-size: 0.9rem;
+				color: lighten($color-fg, 30%);
+			}
+		}
+	}
+}

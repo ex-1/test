@@ -1,0 +1,12 @@
+@import '@/styles/variables.scss';
+@import '@/styles/forms.scss';
+
+.client-form-section {
+	padding: 1.5rem;
+}
+
+.continue-btn {
+	background-color: $color-primary;
+	width: 150px;
+	font-size: 1.025rem;
+}
