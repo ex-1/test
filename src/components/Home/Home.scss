@@ -2,4 +2,52 @@
 	&-wrapper {
 		margin-top: 10vw;
 	}
+
+	&__header {
+		margin-bottom: 2rem;
+	}
+
+	&__title {
+		font-size: 1.75rem;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 2.625rem; /* 150% */
+	}
+
+	&__fst-block {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-right: 1.25rem;
+	}
+
+	&__path-to-page {
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+
+		&-wrapper {
+			margin-bottom: 1.25rem;
+		}
+		& .path {
+			&__point {
+				color: #8e8e8e;
+				text-decoration: none;
+				font-size: 1rem;
+				font-style: normal;
+				font-weight: 500;
+			}
+
+			&__separator {
+				color: #8e8e8e;
+				font-size: 1.5rem;
+			}
+		}
+	}
+}
+
+.forms-slice {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
 }

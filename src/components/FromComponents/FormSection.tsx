@@ -13,7 +13,9 @@ export default function FormSection(
             <div className="form-section__title-wrapper">
                 <span className="form-section__title">{sectionTitle}</span>
             </div>
-            {children}
+            <div className="form-section__content">
+                {children}
+            </div>
         </div>
     )
 }

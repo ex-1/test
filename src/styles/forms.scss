@@ -1,7 +1,29 @@
 @import '@/styles/variables.scss';
 
-$color-unactive: lighten($color-fg, 65%);
+$color-unactive: #c7c7c7;
 $color-active: $color-primary;
+
+@mixin WordField {
+	-moz-appearance: textfield;
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	padding: 0.75rem 1.25rem;
+	background-color: $color-bg-el;
+
+	border: 0.12rem solid $color-unactive;
+	border-radius: 0.3125rem;
+
+	color: #8e8e8e;
+	font-weight: 500;
+	font-size: 1rem;
+	line-height: 1.5rem;
+
+	width: 100%;
+	max-width: 600px;
+}
 
 .form {
 	display: flex;
@@ -13,17 +35,23 @@ $color-active: $color-primary;
 		flex-direction: column;
 		padding: 0.5rem;
 		margin-bottom: 2rem;
+		gap: 1.875rem;
+		max-width: 600px;
 
 		&__title {
-			font-size: 1.4rem;
+			font-size: 1.25rem;
 			font-weight: 600;
 			&-wrapper {
 				width: 100%;
 				display: flex;
 				justify-content: flex-start;
 				align-items: center;
-				margin-bottom: 2rem;
 			}
+		}
+
+		&__content {
+			display: flex;
+			flex-direction: column;
 		}
 	}
 
@@ -38,13 +66,21 @@ $color-active: $color-primary;
 
 		&__caption {
 			font-weight: 600;
-			font-size: 1.1rem;
+			font-size: 1rem;
 			margin-bottom: 1rem;
 		}
-		&__title {
+
+		&__remark {
+			margin-top: 0.5rem;
+			color: $color-primary;
+			font-weight: 500;
+		}
+
+		&__label {
 			color: $color-fg;
-			font-size: 1rem;
-			font-weight: 600;
+			font-size: 0.875rem;
+			line-height: 1.3125rem;
+			font-weight: 500;
 			margin-bottom: 0.3rem;
 			user-select: none;
 
@@ -58,28 +94,48 @@ $color-active: $color-primary;
 		}
 
 		&__input {
-			display: flex;
-			justify-content: flex-start;
-			align-items: center;
-
-			padding: 0.65rem 1rem;
-			background-color: $color-bg-el;
-
-			border: 0.12rem solid $color-unactive;
-			color: lighten($color-fg, 65%);
-			border-radius: 6px;
-
-			font-size: 1rem;
-			min-height: 35px;
-
-			width: 100%;
-			max-width: 600px;
+			@include WordField();
 
 			will-change: border-color;
 			transition: border-color 250ms ease-in-out;
+
+			&:not(:placeholder-shown) {
+				color: $color-fg;
+			}
+
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				appearance: none;
+				margin: 0;
+			}
+
 			&:focus {
 				border-color: $color-active;
 				color: $color-fg;
+			}
+		}
+
+		&__select {
+			appearance: none;
+			cursor: pointer;
+			@include WordField();
+
+			&:not(:invalid) {
+				color: $color-fg;
+			}
+
+			& option {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			& option:not(:disabled) {
+				color: $color-fg;
+			}
+
+			&:active {
+				border-color: $color-active;
 			}
 		}
 
@@ -87,17 +143,19 @@ $color-active: $color-primary;
 		&__radio {
 			appearance: none;
 			position: relative;
-			width: 1.35rem;
-			height: 1.35rem;
+			width: 1.25rem;
+			height: 1.25rem;
 			border: 0.14rem solid $color-unactive;
 			border-radius: 50%;
 			will-change: border-color, background-color;
 			transition: border-color 150ms ease-in-out,
 				background-color 150ms ease-in-out;
+			cursor: pointer;
 
 			&::before {
 				content: '';
 				position: absolute;
+				display: block;
 				top: 50%;
 				left: 50%;
 				transform: translate(-50%, -50%);
@@ -123,16 +181,41 @@ $color-active: $color-primary;
 		&__checkbox {
 			border-radius: 5px;
 			&::before {
-				content: 'v';
-				color: $color-bg-main;
-				font-weight: 700;
-				top: 45%;
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: url('/assets/check.svg') center no-repeat;
+				background-size: 100%;
+				width: 85%;
+				height: 85%;
+			}
+		}
+
+		&.select {
+			position: relative;
+			& .expand-btn {
+				position: absolute;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				text-align: center;
-				border: 0;
-				background: transparent;
+				position: absolute;
+				right: 1.25rem;
+				top: 65%;
+				transform: translateY(-40%);
+				background: url('/assets/caret-down.svg') no-repeat center;
+				background-size: 100%;
+				width: 1.25rem;
+				height: 1.25rem;
+				cursor: pointer;
+				pointer-events: none;
+
+				transition: transform 250ms ease-in-out;
+			}
+
+			& .form-field__select:active ~ .expand-btn {
+				transform: translateY(-40%) rotate(180deg);
 			}
 		}
 
@@ -146,12 +229,12 @@ $color-active: $color-primary;
 			position: relative;
 			width: fit-content;
 
-			& .form-field__title {
+			& .form-field__label {
 				margin-bottom: 0;
 				margin-left: 0.6rem;
 				font-weight: normal;
 				font-size: 0.9rem;
-				color: lighten($color-fg, 30%);
+				color: #505050;
 			}
 		}
 	}

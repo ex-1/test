@@ -1,8 +1,22 @@
 @import '@/styles/variables.scss';
 @import '@/styles/forms.scss';
 
-.client-form-section {
-	padding: 1.5rem;
+.client-form {
+	&-block {
+		padding: 2.8rem;
+	}
+
+	&__separator {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 0.75rem;
+		gap: 1.875rem;
+	}
+
+	&__nds-select {
+		max-width: 180px;
+	}
 }
 
 .continue-btn {

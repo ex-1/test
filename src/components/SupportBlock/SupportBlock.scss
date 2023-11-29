@@ -1,0 +1,37 @@
+@import '@/styles/variables.scss';
+
+.support {
+	&-block {
+		padding: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.615rem;
+
+		&__title {
+			font-size: 1rem;
+			font-weight: 600;
+			line-height: 1.5rem;
+			word-wrap: break-word;
+		}
+
+		&__content {
+			font-size: 0.875rem;
+			font-weight: 500;
+			line-height: 1.3125rem;
+		}
+	}
+}
+
+.appeal-btn {
+	background-color: transparent;
+	padding: 0.625rem 1.25rem;
+	border-radius: 0.3125rem;
+	border: 1px solid #c7c7c7;
+
+	& span {
+		color: $color-primary;
+		font-size: 0.875rem;
+		font-weight: 600;
+		line-height: 1.3125rem; /* 150% */
+	}
+}
