@@ -4,7 +4,7 @@ $color-unactive: #c7c7c7;
 $color-active: $color-primary;
 
 @mixin WordField {
-	-moz-appearance: textfield;
+	-moz-appearance: spinner-textfield;
 
 	display: flex;
 	justify-content: flex-start;
@@ -134,7 +134,8 @@ $color-active: $color-primary;
 				color: $color-fg;
 			}
 
-			&:active {
+			&:active,
+			&:focus {
 				border-color: $color-active;
 			}
 		}
@@ -214,7 +215,8 @@ $color-active: $color-primary;
 				transition: transform 250ms ease-in-out;
 			}
 
-			& .form-field__select:active ~ .expand-btn {
+			& .form-field__select:active ~ .expand-btn,
+			& .form-field__select:focus ~ .expand-btn {
 				transform: translateY(-40%) rotate(180deg);
 			}
 		}
