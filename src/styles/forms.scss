@@ -4,8 +4,6 @@ $color-unactive: #c7c7c7;
 $color-active: $color-primary;
 
 @mixin WordField {
-	-moz-appearance: spinner-textfield;
-
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -94,6 +92,7 @@ $color-active: $color-primary;
 		}
 
 		&__input {
+			-moz-appearance: textfield;
 			@include WordField();
 
 			will-change: border-color;
@@ -117,6 +116,7 @@ $color-active: $color-primary;
 
 		&__select {
 			appearance: none;
+			-moz-appearance: spinner-textfield;
 			cursor: pointer;
 			@include WordField();
 
