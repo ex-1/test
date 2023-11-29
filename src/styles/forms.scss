@@ -3,26 +3,6 @@
 $color-unactive: #c7c7c7;
 $color-active: $color-primary;
 
-@mixin WordField {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-
-	padding: 0.75rem 1.25rem;
-	background-color: $color-bg-el;
-
-	border: 0.12rem solid $color-unactive;
-	border-radius: 0.3125rem;
-
-	color: #8e8e8e;
-	font-weight: 500;
-	font-size: 1rem;
-	line-height: 1.5rem;
-
-	width: 100%;
-	max-width: 600px;
-}
-
 .form {
 	display: flex;
 	flex-direction: column;
@@ -67,177 +47,224 @@ $color-active: $color-primary;
 			font-size: 1rem;
 			margin-bottom: 1rem;
 		}
+	}
+}
 
-		&__remark {
-			margin-top: 0.5rem;
-			color: $color-primary;
-			font-weight: 500;
-		}
+@mixin BlockInput {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 
-		&__label {
+	padding: 0.75rem 1.25rem;
+	background-color: $color-bg-el;
+
+	border: 0.12rem solid $color-unactive;
+	border-radius: 0.3125rem;
+
+	color: #8e8e8e;
+	font-weight: 500;
+	font-size: 1rem;
+	line-height: 1.5rem;
+
+	width: 100%;
+	max-width: 600px;
+}
+
+.textfield-input {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	max-width: 600px;
+	width: 100%;
+
+	&-wrapper {
+		margin-bottom: 2rem;
+	}
+
+	&__label {
+		color: $color-fg;
+		font-size: 0.875rem;
+		line-height: 1.3125rem;
+		font-weight: 500;
+		margin-bottom: 0.3rem;
+		user-select: none;
+	}
+
+	&__input {
+		@include BlockInput();
+		appearance: textfield;
+
+		will-change: border-color;
+		transition: border-color 250ms ease-in-out;
+
+		&:not(:placeholder-shown) {
 			color: $color-fg;
-			font-size: 0.875rem;
-			line-height: 1.3125rem;
-			font-weight: 500;
-			margin-bottom: 0.3rem;
-			user-select: none;
-
-			&-wrapper {
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-				text-align: center;
-				margin-bottom: 0.3rem;
-			}
 		}
 
-		&__input {
-			-moz-appearance: textfield;
-			@include WordField();
-
-			will-change: border-color;
-			transition: border-color 250ms ease-in-out;
-
-			&:not(:placeholder-shown) {
-				color: $color-fg;
-			}
-
-			&::-webkit-inner-spin-button,
-			&::-webkit-outer-spin-button {
-				appearance: none;
-				margin: 0;
-			}
-
-			&:focus {
-				border-color: $color-active;
-				color: $color-fg;
-			}
-		}
-
-		&__select {
+		&::-webkit-inner-spin-button,
+		&::-webkit-outer-spin-button {
 			appearance: none;
-			-moz-appearance: spinner-textfield;
-			cursor: pointer;
-			@include WordField();
-
-			&:not(:invalid) {
-				color: $color-fg;
-			}
-
-			& option {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-
-			& option:not(:disabled) {
-				color: $color-fg;
-			}
-
-			&:active,
-			&:focus {
-				border-color: $color-active;
-			}
+			margin: 0;
 		}
 
-		&__checkbox,
-		&__radio {
-			appearance: none;
-			position: relative;
-			width: 1.25rem;
-			height: 1.25rem;
-			border: 0.14rem solid $color-unactive;
+		&:focus {
+			border-color: $color-active;
+			color: $color-fg;
+		}
+	}
+
+	&__error {
+		margin-top: 0.5rem;
+		color: $color-primary;
+		font-weight: 500;
+	}
+}
+
+.switchfield-input {
+	cursor: pointer;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	&-wrapper {
+		margin-bottom: 1rem;
+		width: fit-content;
+	}
+
+	&__input {
+		appearance: none;
+		position: relative;
+		width: 1.25rem;
+		height: 1.25rem;
+		border: 0.14rem solid $color-unactive;
+		border-radius: 50%;
+		will-change: border-color, background-color;
+		transition: border-color 150ms ease-in-out,
+			background-color 150ms ease-in-out;
+		cursor: pointer;
+
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 45%;
+			height: 45%;
+			background-color: $color-bg-main;
 			border-radius: 50%;
-			will-change: border-color, background-color;
-			transition: border-color 150ms ease-in-out,
-				background-color 150ms ease-in-out;
-			cursor: pointer;
+			opacity: 0;
+			user-select: none;
+			will-change: opacity;
+			transition: opacity 150ms ease-in-out 50ms;
+		}
 
+		&:checked {
+			background-color: $color-active;
+			border-color: $color-active;
 			&::before {
-				content: '';
-				position: absolute;
-				display: block;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				width: 45%;
-				height: 45%;
-				background-color: $color-bg-main;
-				border-radius: 50%;
-				opacity: 0;
-				user-select: none;
-				will-change: opacity;
-				transition: opacity 150ms ease-in-out 50ms;
-			}
-
-			&:checked {
-				background-color: $color-active;
-				border-color: $color-active;
-				&::before {
-					opacity: 1;
-				}
+				opacity: 1;
 			}
 		}
+	}
 
-		&__checkbox {
-			border-radius: 5px;
-			&::before {
-				content: '';
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background: url('/assets/check.svg') center no-repeat;
-				background-size: 100%;
-				width: 85%;
-				height: 85%;
-			}
+	&__label {
+		margin-bottom: 0;
+		margin-left: 0.6rem;
+		font-weight: normal;
+		font-size: 0.9rem;
+		color: #505050;
+		user-select: none;
+	}
+
+	&__error {
+		margin-top: 0.5rem;
+		color: $color-primary;
+		font-weight: 500;
+	}
+
+	&.checkbox &__input {
+		border-radius: 5px;
+		&::before {
+			background: url('/assets/check.svg') center no-repeat;
+			background-size: 100%;
+			width: 85%;
+			height: 85%;
+		}
+	}
+}
+
+.selectfield-input {
+	width: 100%;
+
+	&-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		max-width: 600px;
+		width: 100%;
+		position: relative;
+		margin-bottom: 1rem;
+	}
+
+	&-wrapper .expand-btn {
+		position: absolute;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 1.25rem;
+		top: 60%;
+		transform: translateY(-25%);
+		background: url('/assets/caret-down.svg') no-repeat center;
+		background-size: 100%;
+		width: 1.25rem;
+		height: 1.25rem;
+		cursor: pointer;
+		pointer-events: none;
+
+		transition: transform 250ms ease-in-out;
+	}
+
+	&__input:active ~ .expand-btn,
+	&__input:focus ~ .expand-btn {
+		transform: translateY(-25%) rotate(180deg);
+	}
+
+	&__input {
+		@include BlockInput();
+		appearance: none;
+		cursor: pointer;
+
+		&:not(:invalid) {
+			color: $color-fg;
 		}
 
-		&.select {
-			position: relative;
-			& .expand-btn {
-				position: absolute;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				position: absolute;
-				right: 1.25rem;
-				top: 65%;
-				transform: translateY(-40%);
-				background: url('/assets/caret-down.svg') no-repeat center;
-				background-size: 100%;
-				width: 1.25rem;
-				height: 1.25rem;
-				cursor: pointer;
-				pointer-events: none;
-
-				transition: transform 250ms ease-in-out;
-			}
-
-			& .form-field__select:active ~ .expand-btn,
-			& .form-field__select:focus ~ .expand-btn {
-				transform: translateY(-40%) rotate(180deg);
-			}
-		}
-
-		&.radio,
-		&.checkbox {
-			margin-bottom: 1rem;
-			cursor: pointer;
+		& option {
+			display: flex;
+			justify-content: center;
 			align-items: center;
-			justify-content: flex-start;
-			flex-direction: row;
-			position: relative;
-			width: fit-content;
-
-			& .form-field__label {
-				margin-bottom: 0;
-				margin-left: 0.6rem;
-				font-weight: normal;
-				font-size: 0.9rem;
-				color: #505050;
-			}
 		}
+
+		& option:not(:disabled) {
+			color: $color-fg;
+		}
+
+		&:active,
+		&:focus {
+			border-color: $color-active;
+		}
+	}
+
+	&__label {
+		color: $color-fg;
+		font-size: 0.875rem;
+		line-height: 1.3125rem;
+		font-weight: 500;
+		margin-bottom: 0.3rem;
+		user-select: none;
 	}
 }
